@@ -6,8 +6,8 @@ import React from "react";
 const Heading = () => {
   return (
     <div className="max-w-7xl flex flex-col sm:justify-center lg:flex-row">
-      <div className="w-full flex flex-col justify-center pt-[80px] gap-y-3 md:items-center lg:items-start lg:justify-start  lg:w-[60%] ">
-        <h1 className="text-5xl font-semibold sm:text-6xl md:max-w-md md:text-center lg:text-left lg:text-7xl lg:font-bold lg:max-w-none">
+      <div className="w-full flex flex-col justify-center pt-[80px] gap-y-3 md:items-center lg:items-start lg:justify-start  lg:w-[60%]">
+        <h1 className="title-h1">
           The happier workspace
           <br />
         </h1>
@@ -19,7 +19,7 @@ const Heading = () => {
             Get Notion Free
           </Button>
         </div>
-        <div className="mt-6 md:text-center lg:text-start">
+        <div className="my-6 md:text-center lg:text-start ">
           <span className="text-gray-400">Trusted by teams at</span>
           <div className="flex gap-x-3 pt-2 sm:justify-evenly">
             <Image src={"/openai-v2.svg"} alt="openai" width={84} height={23} />

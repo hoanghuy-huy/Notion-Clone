@@ -43,8 +43,8 @@ const HeroItems: ISlide[] = [
 const renderSlider = () => {
   return HeroItems.map((item) => {
     return (
-      <CarouselItem key={item.id}>
-        <Image src={item.src} alt={item.alt} width={1920} height={1080} />
+      <CarouselItem key={item.id} >
+        <Image src={item.src} alt={item.alt} width={1920} height={1080} className="object-cover"/>
       </CarouselItem>
     );
   });
@@ -96,9 +96,15 @@ const SuperDuperHero = () => {
 
   return (
     <div className="w-full mt-5">
-      <div className="rounded-xl ">
-        <Carousel setApi={setApi} plugins={[autoplay]}>
-          <CarouselContent>{renderSlider()}</CarouselContent>
+      <div className="rounded-xl border overflow-hidden shadow-md">
+        <Carousel
+          setApi={setApi}
+          plugins={[autoplay]}
+          className="pt-12 ps-12 bg-neutral-100 rounded-xl lg:pt-0 lg:ps-0"
+        >
+          <CarouselContent className="rounded-xl">
+            {renderSlider()}
+          </CarouselContent>
         </Carousel>
       </div>
       <div className="w-full mt-3 flex justify-center">
