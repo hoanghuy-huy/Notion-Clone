@@ -16,7 +16,7 @@ const Heading = () => {
         </p>
         <div>
           <Button className="w-full" variant={"blue"} size="lg">
-            Get Notion Free
+            Get Motion Free
           </Button>
         </div>
         <div className="my-6 md:text-center lg:text-start ">

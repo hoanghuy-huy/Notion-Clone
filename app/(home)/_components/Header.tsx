@@ -1,10 +1,14 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { SignInButton} from "@clerk/nextjs";
 import clsx from "clsx";
+// import { useConvexAuth } from "convex/react";
+// import Link from "next/link";
 import Image from "next/image";
 import React from "react";
 
 const Header = () => {
+  // const { isAuthenticated, isLoading } = useConvexAuth();
   const [scrolled, setScrolled] = React.useState(false);
   React.useEffect(() => {
     console.log(window.scrollY);
@@ -39,7 +43,14 @@ const Header = () => {
         />
       </div>
       <div className="flex gap-x-4">
-        <Button>Login</Button>
+        <>
+          <SignInButton mode="modal">
+            <Button variant={"ghost"}>Login</Button>
+          </SignInButton>
+          <SignInButton mode="modal">
+            <Button>Get Motion Free</Button>
+          </SignInButton>
+        </>
       </div>
     </div>
   );
