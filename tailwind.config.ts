@@ -56,6 +56,15 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      keyframes: {
+        "spinner-leaf-fade": {
+          "0%, 100%": { opacity: "0.3" },
+          "50%": { opacity: "1" },
+        },
+      },
+      animation: {
+        "spinner-leaf-fade": "spinner-leaf-fade 1.2s linear infinite",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

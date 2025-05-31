@@ -1,9 +1,14 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { SignInButton } from "@clerk/nextjs";
+import { useConvexAuth } from "convex/react";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const Heading = () => {
+  const { isAuthenticated, isLoading } = useConvexAuth();
+
   return (
     <div className="max-w-7xl flex flex-col sm:justify-center lg:flex-row">
       <div className="w-full flex flex-col justify-center pt-[80px] gap-y-3 md:items-center lg:items-start lg:justify-start  lg:w-[60%]">
@@ -15,9 +20,34 @@ const Heading = () => {
           Write. Plan. Collaborate. With a little help from AI.
         </p>
         <div>
-          <Button className="w-full" variant={"blue"} size="lg">
-            Get Motion Free
-          </Button>
+          {isAuthenticated ? (
+            <>
+              <Button
+                variant="blue"
+                size={"lg"}
+                isLoading={isLoading}
+                disabled={isLoading}
+                asChild
+              >
+                <Link className="flex items-center" href="/documents">
+                  Enter Motion
+                </Link>
+              </Button>
+            </>
+          ) : (
+            <>
+              <SignInButton mode="modal">
+                <Button
+                  variant="blue"
+                  size={"lg"}
+                  isLoading={isLoading}
+                  disabled={isLoading}
+                >
+                  Get Motion Free
+                </Button>
+              </SignInButton>
+            </>
+          )}
         </div>
         <div className="my-6 md:text-center lg:text-start ">
           <span className="text-gray-400">Trusted by teams at</span>

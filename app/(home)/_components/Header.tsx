@@ -1,14 +1,15 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { SignInButton} from "@clerk/nextjs";
+import { SignInButton, UserButton } from "@clerk/nextjs";
 import clsx from "clsx";
-// import { useConvexAuth } from "convex/react";
+import { useConvexAuth } from "convex/react";
 // import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const Header = () => {
-  // const { isAuthenticated, isLoading } = useConvexAuth();
+  const { isAuthenticated, isLoading } = useConvexAuth();
   const [scrolled, setScrolled] = React.useState(false);
   React.useEffect(() => {
     console.log(window.scrollY);
@@ -25,7 +26,7 @@ const Header = () => {
         !scrolled && "border-white"
       )}
     >
-      <div>
+      <div className="flex justify-center items-center">
         {/* <Image
           src="/logo.svg"
           alt="Logo"
@@ -41,16 +42,36 @@ const Header = () => {
           width={50}
           className="block object-contain"
         />
+        <span className="font-semibold">Motion</span>
       </div>
       <div className="flex gap-x-4">
-        <>
-          <SignInButton mode="modal">
-            <Button variant={"ghost"}>Login</Button>
-          </SignInButton>
-          <SignInButton mode="modal">
-            <Button>Get Motion Free</Button>
-          </SignInButton>
-        </>
+        {isAuthenticated ? (
+          <div className="flex justify-center items-center gap-x-4">
+            <div className="rounded-full pt-2">
+              <UserButton afterSwitchSessionUrl="/" />
+            </div>
+            <Button isLoading={isLoading} disabled={isLoading} asChild>
+              <Link href="/documents">Enter Motion Free</Link>
+            </Button>
+          </div>
+        ) : (
+          <>
+            <SignInButton mode="modal">
+              <Button
+                isLoading={isLoading}
+                disabled={isLoading}
+                variant={"ghost"}
+              >
+                Login
+              </Button>
+            </SignInButton>
+            <SignInButton mode="modal">
+              <Button isLoading={isLoading} disabled={isLoading}>
+                Get Motion Free
+              </Button>
+            </SignInButton>
+          </>
+        )}
       </div>
     </div>
   );
