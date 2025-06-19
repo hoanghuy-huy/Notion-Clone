@@ -19,13 +19,12 @@ export const metadata: Metadata = {
   description: "",
   icons: {
     icon: [
+      // {
+      //   media: "(prefers-color-scheme: dark)",
+      //   url: "/logo-dark.svg",
+      // },
       {
-        media: "(prefers-color-scheme: dark)",
         url: "/logo-dark.svg",
-      },
-      {
-        media: "(prefers-color-scheme: light)",
-        url: "/logo.svg",
       },
     ],
   },

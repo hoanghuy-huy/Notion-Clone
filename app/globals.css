@@ -8,9 +8,6 @@ body,
   height: 100%;
 }
 
-
-
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -19,7 +16,9 @@ body,
 
 @layer base {
   :root {
-    --height-header:66px;
+    --height-header: 66px;
+    --height-navbar: 50px;
+    --default-sidebar-width: 450px; 
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;

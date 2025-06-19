@@ -1,7 +1,8 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  darkMode: ["class"],
+  // darkMode: ["class"],
+  darkMode: "class",
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -56,6 +57,9 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      height: {
+        navbar: "var(--height-navbar)",
+      },
       keyframes: {
         "spinner-leaf-fade": {
           "0%, 100%": { opacity: "0.3" },
@@ -64,6 +68,13 @@ const config: Config = {
       },
       animation: {
         "spinner-leaf-fade": "spinner-leaf-fade 1.2s linear infinite",
+      },
+      width: {
+        defaultSidebarWidth: "var(--default-sidebar-width)",
+      },
+      backgroundColor: {
+        hover: "bg-neutral-300",
+        sidebar: "bg-[#f8f8f7]",
       },
     },
   },

@@ -8,7 +8,7 @@ import {
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Autoplay, { AutoplayType } from "embla-carousel-autoplay";
-import { ISlide } from "@/types";
+import { ISlide } from "@/types/ui";
 import { BookText, CalendarDays, Target, TrainFront } from "lucide-react";
 import { type CarouselApi } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
