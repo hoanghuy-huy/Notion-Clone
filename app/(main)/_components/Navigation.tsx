@@ -1,18 +1,21 @@
 "use client";
 import React, { ElementRef, useRef } from "react";
-import {
-  ChevronsLeft,
-  CircleUser,
-  CircleUserIcon,
-  MenuIcon,
-  SquarePen,
-} from "lucide-react";
+import { MenuIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useMediaQuery } from "usehooks-ts";
 import { cn } from "@/lib/utils";
 import { useUser } from "@clerk/nextjs";
-import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import UserItem from "./user-item";
+import SidebarItem from "./menu-item";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import SearchItem from "./search-item";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
 const Navigation = () => {
   const pathName = usePathname();
   const defaultWidthSidebar = 250;
@@ -113,12 +116,20 @@ const Navigation = () => {
       <aside
         ref={sidebarRef}
         className={cn(
-          "group/sidebar h-full bg-secondary  overflow-y-auto relative flex flex-col z-[99999] overflow-x-hidden",
+          "group/sidebar h-full bg-secondary  overflow-y-auto relative flex flex-col z-[99999] overflow-x-hidden gap-5",
           isResetting && "transition-all ease-in-out"
         )}
       >
-        <div className="px-3">
-          <UserItem closeSidebar={closeSidebar} />
+        <div className="px-3 flex flex-col gap-y-4">
+          <div>
+            <UserItem closeSidebar={closeSidebar} />
+          </div>
+          <div>
+            <SearchItem />
+          </div>
+          <div>
+            <SidebarItem />
+          </div>
         </div>
 
         <div

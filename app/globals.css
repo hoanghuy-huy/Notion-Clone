@@ -12,13 +12,17 @@ body,
   .text-balance {
     text-wrap: balance;
   }
+
+  .btn-hover-effect {
+    @apply hover:text-primary cursor-pointer hover:bg-primary/5 rounded-sm p-1 text-muted-foreground text-sm font-medium;
+  }
 }
 
 @layer base {
   :root {
     --height-header: 66px;
     --height-navbar: 50px;
-    --default-sidebar-width: 450px; 
+    --default-sidebar-width: 450px;
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
