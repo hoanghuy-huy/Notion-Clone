@@ -1,4 +1,4 @@
-import { IItemSection } from "@/app/constants";
+import { IItemSection } from "@/app/constants/ui";
 import Image from "next/image";
 import React from "react";
 
@@ -93,9 +93,7 @@ const ContentSection: React.FC<IContentSectionProps> = ({
             autoPlay
             className="hidden md:block"
             src={mediaDesktop.src}
-          >
-
-          </video>
+          ></video>
         )}
       </div>
 

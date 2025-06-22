@@ -19,6 +19,8 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useDocuments } from "@/app/hook/documents";
+import { Enums } from "@/config";
 interface IUserItemProps {
   closeSidebar: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }
@@ -31,17 +33,8 @@ const UserItem = ({ closeSidebar }: IUserItemProps) => {
   const handleOpenMenu = () => {
     triggerRef.current?.click();
   };
-  const onCreate = () => {
-    const promise = create({
-      title: "New page",
-    });
 
-    toast.promise(promise, {
-      loading: "Creating note...",
-      success: "Note created successfully",
-      error: "Failed to create note",
-    });
-  };
+  const { onCreate } = useDocuments();
 
   return (
     <div
@@ -92,10 +85,10 @@ const UserItem = ({ closeSidebar }: IUserItemProps) => {
           >
             <Tooltip>
               <TooltipTrigger asChild>
-                <SquarePen size={20} />
+                <SquarePen size={20} className="text-gray-400" />
               </TooltipTrigger>
-              <TooltipContent  side="right">
-                <p>Create new page</p>
+              <TooltipContent side="right">
+                <p> {Enums.documents.tooltipCreateNewFile}</p>
               </TooltipContent>
             </Tooltip>
           </div>
@@ -127,10 +120,7 @@ const UserItem = ({ closeSidebar }: IUserItemProps) => {
             </div>
             <DropdownMenuSeparator className="bg-gray-300/5 h-[1px]" />
           </div>
-          <DropdownMenuItem
-            asChild
-            className="w-full cursor-pointer text-xs font-medium text-muted-foreground hover:bg-primary/5"
-          >
+          <DropdownMenuItem asChild className="w-full text-muted-foreground font-medium hover:btn-hover-effect">
             <SignOutButton redirectUrl="/">Sign Out</SignOutButton>
           </DropdownMenuItem>
         </DropdownMenuContent>

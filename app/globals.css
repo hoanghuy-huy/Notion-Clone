@@ -14,7 +14,11 @@ body,
   }
 
   .btn-hover-effect {
-    @apply hover:text-primary cursor-pointer hover:bg-primary/5 rounded-sm p-1 text-muted-foreground text-sm font-medium;
+    @apply hover:text-primary cursor-pointer hover:bg-primary/5 rounded-sm text-muted-foreground text-sm font-medium;
+  }
+
+  .icon-hover-effect {
+    @apply hover:text-primary cursor-pointer hover:bg-primary/5 rounded-sm text-muted-foreground;
   }
 }
 

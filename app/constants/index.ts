@@ -1,2 +1,1 @@
-export * from "./slide";
-export * from "./itemSection";
+export * from "./ui";

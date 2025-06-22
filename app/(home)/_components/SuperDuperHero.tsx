@@ -12,7 +12,6 @@ import { ISlide } from "@/types/ui";
 import { BookText, CalendarDays, Target, TrainFront } from "lucide-react";
 import { type CarouselApi } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
-import { TimePlaySlide } from "@/app/constants";
 const HeroItems: ISlide[] = [
   {
     id: 0,
@@ -43,8 +42,14 @@ const HeroItems: ISlide[] = [
 const renderSlider = () => {
   return HeroItems.map((item) => {
     return (
-      <CarouselItem key={item.id} >
-        <Image src={item.src} alt={item.alt} width={1920} height={1080} className="object-cover"/>
+      <CarouselItem key={item.id}>
+        <Image
+          src={item.src}
+          alt={item.alt}
+          width={1920}
+          height={1080}
+          className="object-cover"
+        />
       </CarouselItem>
     );
   });
@@ -78,7 +83,7 @@ const SuperDuperHero = () => {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
   const autoplay = Autoplay({
-    delay: TimePlaySlide["5s"],
+    delay: 5000,
     stopOnInteraction: false,
   });
 
