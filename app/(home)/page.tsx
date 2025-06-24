@@ -1,6 +1,6 @@
 import { AtSign, Images, Smile } from "lucide-react";
 import { ContentSection, Header, Heading, SuperDuperHero } from "./_components";
-import { IItemSection } from "../constants/ui";
+import { IItemSection } from "../../constants/ui";
 
 export default function Home() {
   const dataListItem: IItemSection[] = [

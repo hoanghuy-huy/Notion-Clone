@@ -1,4 +1,4 @@
-import { IItemSection } from "@/app/constants/ui";
+import { IItemSection } from "@/constants/ui";
 import Image from "next/image";
 import React from "react";
 

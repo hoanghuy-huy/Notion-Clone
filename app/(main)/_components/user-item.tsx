@@ -19,7 +19,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { useDocuments } from "@/app/hook/documents";
+import { useDocuments } from "@/hook/documents";
 import { Enums } from "@/config";
 interface IUserItemProps {
   closeSidebar: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => void;
@@ -120,7 +120,10 @@ const UserItem = ({ closeSidebar }: IUserItemProps) => {
             </div>
             <DropdownMenuSeparator className="bg-gray-300/5 h-[1px]" />
           </div>
-          <DropdownMenuItem asChild className="w-full text-muted-foreground font-medium hover:btn-hover-effect">
+          <DropdownMenuItem
+            asChild
+            className="w-full text-muted-foreground font-medium hover:btn-hover-effect"
+          >
             <SignOutButton redirectUrl="/">Sign Out</SignOutButton>
           </DropdownMenuItem>
         </DropdownMenuContent>
