@@ -24,7 +24,7 @@ const SidebarItem = () => {
                 className="hover:icon-hover-effect"
                 strokeWidth={1.5}
                 size={18}
-                onClick={() => onCreate()}
+                onClick={() => onCreate({})}
               />
             </div>
           </TooltipTrigger>
@@ -34,7 +34,7 @@ const SidebarItem = () => {
         </Tooltip>
       </div>
       <div className="mt-1 px-1">
-        <DocumentList/>
+        <DocumentList />
       </div>
     </div>
   );
