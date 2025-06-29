@@ -81,7 +81,7 @@ const UserItem = ({ closeSidebar }: IUserItemProps) => {
 
           <div
             className="shrink-0 h-6 w-6 flex items-center justify-center"
-            onClick={() => onCreate()}
+            onClick={() => onCreate({})}
           >
             <Tooltip>
               <TooltipTrigger asChild>

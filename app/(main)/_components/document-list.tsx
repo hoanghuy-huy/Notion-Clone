@@ -47,16 +47,18 @@ const DocumentList = ({
 
   return (
     <>
-      <p
-        className={cn(
-          "last:block",
-          level === 0 && "hidden",
-          !!parentDocumentId && "hidden"
-        )}
-        style={{ paddingLeft: true ? level * 12 + 24 : undefined }}
-      >
-        No pages inside
-      </p>
+      {level !== 0 && (
+        <p
+          className={cn(
+            "last:block",
+            level === 0 && "hidden",
+            !!parentDocumentId && "hidden"
+          )}
+          style={{ paddingLeft: true ? level * 12 + 24 : undefined }}
+        >
+          No pages inside
+        </p>
+      )}
       {documents?.map((item) => (
         <div key={item._id}>
           <DocumentItem

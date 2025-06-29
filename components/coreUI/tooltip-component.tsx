@@ -14,7 +14,7 @@ const TooltipComponent = ({
 }: TooltipComponentProps) => {
   return (
     <Tooltip>
-      <TooltipTrigger asChild onClick={onClick}>
+      <TooltipTrigger asChild onClick={onClick} >
         {children}
       </TooltipTrigger>
       <TooltipContent hideWhenDetached>

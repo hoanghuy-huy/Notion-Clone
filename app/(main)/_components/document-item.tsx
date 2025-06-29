@@ -2,17 +2,29 @@ import { Enums } from "@/config";
 import {
   ChevronDown,
   ChevronRight,
+  Copy,
   Ellipsis,
   FileText,
   LucideIcon,
   Plus,
+  SquarePen,
+  SquarePenIcon,
+  Trash2,
 } from "lucide-react";
 import React from "react";
-import { TooltipComponent } from "@/components/components";
+import { DropdownMenuComponent, TooltipComponent } from "@/components/coreUI";
 import { cn } from "@/lib/utils";
 import { Id } from "@/convex/_generated/dataModel";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useDocuments } from "@/hook/documents";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { on } from "events";
 interface IDocumentItemProps {
   id?: Id<"documents">;
   label: string;
@@ -36,7 +48,26 @@ const DocumentItem = ({
   onClick,
   onExpand,
 }: IDocumentItemProps) => {
-  const { onCreate } = useDocuments();
+  const { onCreate, onArchive } = useDocuments();
+  const contentItems = [
+    {
+      icon: <Copy size={20} strokeWidth={1.5} />,
+      title: "Duplicate",
+      shortcut: "Ctrl + D",
+    },
+    {
+      icon: <SquarePen size={20} strokeWidth={1.5} />,
+      title: "Rename",
+      shortcut: "Ctrl + R",
+    },
+    {
+      icon: <Trash2 size={20} strokeWidth={1.5} />,
+      title: "Move to trash",
+      shortcut: "Ctrl + R",
+      hover: "danger",
+      onClick: id ? () => onArchive({ id }) : undefined,
+    },
+  ];
   return (
     <div className="flex items-center btn-hover-effect px-0.5 py-1 group/parent overflow-hidden">
       <div
@@ -63,7 +94,6 @@ const DocumentItem = ({
               role="button"
               onClick={onExpand}
             >
-              {/* {chevronIcon} */}
               <ChevronDown
                 strokeWidth={1.5}
                 size={18}
@@ -77,7 +107,7 @@ const DocumentItem = ({
         </div>
         <p className="truncate mr-1">{label}</p>
       </div>
-      <div className="items-center hidden group-hover/parent:block">
+      <div className="relative flex items-center flex-row-reverse gap-x-2 opacity-0 group-hover/parent:opacity-100 transition-opacity">
         <div className="flex items-center flex-row-reverse gap-x-2 ">
           <TooltipComponent
             message={Enums.documents.tooltipCreateNewFileInside}
@@ -96,13 +126,46 @@ const DocumentItem = ({
               }
             />
           </TooltipComponent>
-          <TooltipComponent message={Enums.documents.tooltipMoreActions}>
-            <Ellipsis
-              strokeWidth={1.5}
-              size={18}
-              className="flex-shrink hover:icon-hover-effect text-muted-foreground"
-            />
-          </TooltipComponent>
+          {/* <DropdownMenuComponent
+            label="More actions"
+            trigger={
+              <TooltipComponent message={Enums.documents.tooltipMoreActions}>
+                <Ellipsis
+                  strokeWidth={1.5}
+                  size={18}
+                  className="flex-shrink hover:icon-hover-effect text-muted-foreground"
+                />
+              </TooltipComponent>
+            }
+            contentItems={[
+              {
+                icon: (
+                  <Trash2
+                    strokeWidth={1.5}
+                    size={18}
+                    className="flex-shrink hover:icon-hover-effect text-muted-foreground"
+                  />
+                ),
+                title: "test",
+                shortcut: "⌘⌘",
+              },
+            ]}
+          /> */}
+          <DropdownMenuComponent
+            label="Page"
+            width={265}
+            contentItems={contentItems}
+          >
+            <DropdownMenuTrigger>
+              <TooltipComponent message={Enums.documents.tooltipMoreActions}>
+                <Ellipsis
+                  strokeWidth={1.5}
+                  size={18}
+                  className="flex-shrink hover:icon-hover-effect text-muted-foreground"
+                />
+              </TooltipComponent>
+            </DropdownMenuTrigger>
+          </DropdownMenuComponent>
         </div>
       </div>
     </div>
