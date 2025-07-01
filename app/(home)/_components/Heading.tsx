@@ -30,7 +30,7 @@ const Heading = () => {
                 asChild
               >
                 <Link className="flex items-center" href="/documents">
-                  Enter Motion
+                  Enter Notix
                 </Link>
               </Button>
             </>
@@ -43,7 +43,7 @@ const Heading = () => {
                   isLoading={isLoading}
                   disabled={isLoading}
                 >
-                  Get Motion Free
+                  Get Notix Free
                 </Button>
               </SignInButton>
             </>

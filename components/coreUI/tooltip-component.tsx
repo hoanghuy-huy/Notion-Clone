@@ -13,8 +13,8 @@ const TooltipComponent = ({
   onClick,
 }: TooltipComponentProps) => {
   return (
-    <Tooltip>
-      <TooltipTrigger asChild onClick={onClick} >
+    <Tooltip disableHoverableContent>
+      <TooltipTrigger asChild onClick={onClick}>
         {children}
       </TooltipTrigger>
       <TooltipContent hideWhenDetached>

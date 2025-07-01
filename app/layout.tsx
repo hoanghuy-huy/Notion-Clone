@@ -15,7 +15,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Motion",
+  title: "Notix",
   description: "",
   icons: {
     icon: [

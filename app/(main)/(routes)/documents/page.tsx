@@ -4,7 +4,7 @@ import React from "react";
 
 const DocumentsPage = () => {
   return (
-    <div className="h-full flex flex-col items-center justify-center space-y-4">
+    <div className="h-full flex flex-col items-center justify-center space-y-4 select-none">
       <Image
         src="/empty.svg"
         alt="Empty"

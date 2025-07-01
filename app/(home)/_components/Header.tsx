@@ -42,7 +42,7 @@ const Header = () => {
           width={50}
           className="block object-contain"
         />
-        <span className="font-semibold">Motion</span>
+        <span className="font-semibold">Notix</span>
       </div>
       <div className="flex gap-x-4">
         {isAuthenticated ? (
@@ -51,7 +51,7 @@ const Header = () => {
               <UserButton afterSwitchSessionUrl="/" />
             </div>
             <Button isLoading={isLoading} disabled={isLoading} asChild>
-              <Link href="/documents">Enter Motion Free</Link>
+              <Link href="/documents">Enter Notix Free</Link>
             </Button>
           </div>
         ) : (
@@ -67,7 +67,7 @@ const Header = () => {
             </SignInButton>
             <SignInButton mode="modal">
               <Button isLoading={isLoading} disabled={isLoading}>
-                Get Motion Free
+                Get Notix Free
               </Button>
             </SignInButton>
           </>

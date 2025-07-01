@@ -1,18 +1,15 @@
 import { Enums } from "@/config";
 import {
   ChevronDown,
-  ChevronRight,
   Copy,
   Ellipsis,
   FileText,
-  LucideIcon,
   Plus,
   SquarePen,
-  SquarePenIcon,
+  Star,
   Trash2,
 } from "lucide-react";
 import React from "react";
-import { DropdownMenuComponent, TooltipComponent } from "@/components/coreUI";
 import { cn } from "@/lib/utils";
 import { Id } from "@/convex/_generated/dataModel";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -21,10 +18,16 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { on } from "events";
+import {
+  DropdownMenuItemComponent,
+  TooltipComponent,
+} from "@/components/coreUI";
+import { useUser } from "@clerk/nextjs";
 interface IDocumentItemProps {
   id?: Id<"documents">;
   label: string;
@@ -49,27 +52,29 @@ const DocumentItem = ({
   onExpand,
 }: IDocumentItemProps) => {
   const { onCreate, onArchive } = useDocuments();
-  const contentItems = [
+  const contentItems: any[] = [
     {
       icon: <Copy size={20} strokeWidth={1.5} />,
       title: "Duplicate",
-      shortcut: "Ctrl + D",
+      // shortcut: "Ctrl + D",
     },
     {
       icon: <SquarePen size={20} strokeWidth={1.5} />,
       title: "Rename",
-      shortcut: "Ctrl + R",
+      // shortcut: "Ctrl + R",
     },
     {
       icon: <Trash2 size={20} strokeWidth={1.5} />,
       title: "Move to trash",
-      shortcut: "Ctrl + R",
+      // shortcut: "Ctrl + R",
       hover: "danger",
       onClick: id ? () => onArchive({ id }) : undefined,
     },
   ];
+  const { user } = useUser();
+
   return (
-    <div className="flex items-center btn-hover-effect px-0.5 py-1 group/parent overflow-hidden">
+    <div className="flex items-center btn-hover-effect px-0.5 py-1 group/parent overflow-hidden" key={id}>
       <div
         className={cn(
           "w-full flex items-center gap-x-1 min-h-6 overflow-hidden ",
@@ -151,11 +156,7 @@ const DocumentItem = ({
               },
             ]}
           /> */}
-          <DropdownMenuComponent
-            label="Page"
-            width={265}
-            contentItems={contentItems}
-          >
+          <DropdownMenu>
             <DropdownMenuTrigger>
               <TooltipComponent message={Enums.documents.tooltipMoreActions}>
                 <Ellipsis
@@ -165,7 +166,32 @@ const DocumentItem = ({
                 />
               </TooltipComponent>
             </DropdownMenuTrigger>
-          </DropdownMenuComponent>
+            <DropdownMenuContent className="w-60">
+              <DropdownMenuLabel className="text-xs text-muted-foreground">
+                Page
+              </DropdownMenuLabel>
+              <DropdownMenuItemComponent
+                icon={<Star size={20} />}
+                title="Add to favorites"
+              />
+              <DropdownMenuSeparator className="bg-gray-300/5 h-[1px]" />
+
+              {contentItems.map((item, idx) => (
+                <DropdownMenuItemComponent
+                  icon={item.icon}
+                  title={item.title}
+                  shortcut={item.shortcut}
+                  hover={item.hover}
+                  onClick={item.onClick}
+                  idx={idx}
+                />
+              ))}
+              <DropdownMenuSeparator className="bg-gray-300/5 h-[1px]" />
+              <p className="text-xs text-muted-foreground font-medium p-2">
+                Last edited by {user?.fullName}
+              </p>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </div>

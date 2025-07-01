@@ -41,9 +41,11 @@ const DropdownMenuComponent = ({
       !(
         React.isValidElement(child) &&
         (child.type === DropdownMenuTrigger ||
-          child.type?.toString().includes("DropdownMenuTrigger"))
+          child.type?.toString().includes("DropdownMenuItem"))
       )
   );
+
+  console.log(content, "content");
   return (
     <DropdownMenu>
       {trigger}
@@ -76,6 +78,10 @@ const DropdownMenuComponent = ({
       </DropdownMenuContent>
     </DropdownMenu>
   );
+};
+
+DropdownMenuComponent.Separator = function Separator() {
+  return <DropdownMenuSeparator className="bg-gray-300/5 h-[1px]" />;
 };
 
 export default DropdownMenuComponent;

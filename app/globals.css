@@ -14,7 +14,7 @@ body,
   }
 
   .btn-hover-effect {
-    @apply hover:text-primary cursor-pointer hover:bg-primary/5 rounded-sm text-muted-foreground text-sm font-medium;
+    @apply hover:text-primary cursor-pointer hover:bg-primary/5 rounded-sm;
   }
 
   .icon-hover-effect {
@@ -83,7 +83,7 @@ body,
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground dark:bg-primary/5 overflow-x-hidden;
   }
 
   .title-h1 {

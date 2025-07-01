@@ -12,8 +12,9 @@ import { archive } from "@/convex/documents";
 export const useDocuments = () => {
   const create = useMutation(api.documents.create);
   const archive = useMutation(api.documents.archive);
+  const restore = useMutation(api.documents.restore);
+  const remove = useMutation(api.documents.remove);
   // const getDocuments = useQuery(api.documents.get);
-
   const onCreate = ({
     title = Enums.documents.titleCreateNewFile,
     parentDocument,
@@ -38,9 +39,28 @@ export const useDocuments = () => {
     const promise = archive({ id: id });
     toast.promise(promise, documentMessages.archive);
   };
+
+  const getTrashDocuments = ({ id }: { id?: Id<"documents"> }) => {
+    const documents = useQuery(api.documents.getTrash, { id: id });
+
+    return documents;
+  };
+
+  const onRestoreDocument = ({ id }: { id: Id<"documents"> }) => {
+    const promise = restore({ id: id });
+    toast.promise(promise, documentMessages.restore);
+  };
+
+  const onRemove = ({ id }: { id: Id<"documents"> }) => {
+    const promise = remove({ id: id });
+    toast.promise(promise, documentMessages.remove);
+  };
   return {
     onCreate,
     onArchive,
+    getTrashDocuments,
+    onRestoreDocument,
+    onRemove, 
     // getDocuments,
   };
 };
