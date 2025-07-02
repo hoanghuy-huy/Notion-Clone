@@ -1,12 +1,12 @@
 import { Doc, Id } from "@/convex/_generated/dataModel";
 import { useDocuments } from "@/hook/documents";
-import { useRouter } from "next/router";
 import React from "react";
 import DocumentItem from "./document-item";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { cn } from "@/lib/utils";
+import { Enums } from "@/config";
 
 interface IDocumentItemProps {
   parentDocumentId?: Id<"documents"> | undefined;
@@ -22,6 +22,12 @@ const DocumentList = ({
     parentDocument: parentDocumentId,
   });
   const [expanded, setExpanded] = React.useState<Record<string, boolean>>({});
+  const router = useRouter();
+  const { documentId } = useParams();
+
+  const redirect = (id: Id<"documents">) => {
+    router.push(Enums.PATH.DOCUMENTS._ + "/" + id);
+  };
 
   if (documents === undefined) {
     return (
@@ -38,7 +44,11 @@ const DocumentList = ({
     );
   }
 
-  const onExpand = (documentId: string) => {
+  const onExpand = (
+    event: React.MouseEvent<HTMLElement, MouseEvent>,
+    documentId: string
+  ) => {
+    event.stopPropagation();
     setExpanded((prev) => ({
       ...prev,
       [documentId]: !prev[documentId],
@@ -59,18 +69,18 @@ const DocumentList = ({
           No pages inside
         </p>
       )}
-      {documents?.map((item) => (
+      {documents?.map((item): any => (
         <div key={item._id}>
           <DocumentItem
             id={item._id}
             level={level}
             label={item.title}
             documentIcon={item.icon}
-            active={false}
-            onExpand={() => onExpand(item._id)}
+            active={documentId === item._id}
+            onExpand={(event) => onExpand(event, item._id)}
             expanded={expanded[item._id]}
             isSearch={false}
-            onClick={() => {}}
+            onClick={() => redirect(item._id)}
           />
           {expanded[item._id] && (
             <DocumentList parentDocumentId={item._id} level={level + 1} />

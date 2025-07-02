@@ -14,7 +14,7 @@ export const useDocuments = () => {
   const archive = useMutation(api.documents.archive);
   const restore = useMutation(api.documents.restore);
   const remove = useMutation(api.documents.remove);
-  // const getDocuments = useQuery(api.documents.get);
+
   const onCreate = ({
     title = Enums.documents.titleCreateNewFile,
     parentDocument,
@@ -23,7 +23,10 @@ export const useDocuments = () => {
   }: {
     parentDocument?: Id<"documents">;
     title?: string;
-    onExpanded?: () => void;
+    onExpanded?: (
+      event?: React.MouseEvent<HTMLElement, MouseEvent>,
+      id?: Id<"documents">
+    ) => void;
     expanded?: boolean;
   }) => {
     const promise = create({
@@ -55,12 +58,19 @@ export const useDocuments = () => {
     const promise = remove({ id: id });
     toast.promise(promise, documentMessages.remove);
   };
+
+  const getOneDocument = ({ id }: { id: Id<"documents"> }) => {
+    const document = useQuery(api.documents.getOne, { idDocument: id });
+
+    return document;
+  };
   return {
     onCreate,
     onArchive,
     getTrashDocuments,
     onRestoreDocument,
-    onRemove, 
+    onRemove,
+    getOneDocument,
     // getDocuments,
   };
 };

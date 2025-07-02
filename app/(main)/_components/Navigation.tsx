@@ -1,7 +1,7 @@
 "use client";
 import React, { ElementRef, useRef } from "react";
-import { MenuIcon, Search } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { MenuIcon, Search, Settings2 } from "lucide-react";
+import { useParams } from "next/navigation";
 import { useMediaQuery } from "usehooks-ts";
 import { cn } from "@/lib/utils";
 import { useUser } from "@clerk/nextjs";
@@ -15,9 +15,18 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { ButtonToggleTheme } from "@/components/theme";
+import Navbar from "./navbar";
 
 const Navigation = () => {
-  const pathName = usePathname();
   const defaultWidthSidebar = 250;
   const isMobile = useMediaQuery("(max-width: 768px)");
   const isResizingRef = useRef(false);
@@ -105,9 +114,16 @@ const Navigation = () => {
     }
   };
 
+  const params = useParams();
+
   React.useEffect(() => {
-    if (sidebarRef.current) {
+    if (sidebarRef.current && navbarRef.current) {
       sidebarRef.current.style.setProperty("width", `${defaultWidthSidebar}px`);
+      navbarRef.current.style.setProperty("left", `${defaultWidthSidebar}px`);
+      navbarRef.current.style.setProperty(
+        "width",
+        `calc(100% - ${defaultWidthSidebar}px)`
+      );
     }
   }, []);
 
@@ -121,15 +137,40 @@ const Navigation = () => {
         )}
       >
         <div className="h-full px-3 flex flex-col gap-y-4">
-          <div className="h-[10%] flex-shrink-0  flex flex-col gap-y-4 mb-2">
+          <div className=" flex-shrink-0  flex flex-col gap-y-4 mb-2">
             <div>
               <UserItem closeSidebar={closeSidebar} />
             </div>
             <div>
               <Item iconLeft={Search} title="Search" />
+              <Dialog>
+                <DialogTrigger asChild>
+                  <div role="button">
+                    <Item iconLeft={Settings2} title="Setting" />
+                  </div>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader className="border-b pb-3">
+                    <DialogTitle className="text-lg font-medium">
+                      My setting
+                    </DialogTitle>
+                  </DialogHeader>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <DialogTitle className="text-lg font-medium">
+                        Appearance
+                      </DialogTitle>
+                      <DialogDescription>
+                        Personalize your experience with light or dark mode
+                      </DialogDescription>
+                    </div>
+                    <div>{<ButtonToggleTheme />}</div>
+                  </div>
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
-          <div className="h-[70%] overflow-y-auto">
+          <div className="overflow-y-auto">
             <SidebarItem title="Private" />
           </div>
         </div>
@@ -149,15 +190,19 @@ const Navigation = () => {
           isMobile && "w-full left-0"
         )}
       >
-        <nav className="bg-transparent px-3 py-2 w-full">
-          {isCollapsed && (
-            <MenuIcon
-              onClick={() => openSidebar()}
-              role="button"
-              className="h-6 w-6 text-muted-foreground"
-            />
-          )}
-        </nav>
+        {!!params.documentId ? (
+          <Navbar openSidebar={() => openSidebar()} isCollapsed={isCollapsed} />
+        ) : (
+          <nav className="bg-transparent px-3 py-2 w-full">
+            {isCollapsed && (
+              <MenuIcon
+                onClick={() => openSidebar()}
+                role="button"
+                className="h-6 w-6 text-muted-foreground"
+              />
+            )}
+          </nav>
+        )}
       </div>
     </div>
   );

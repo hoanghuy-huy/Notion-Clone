@@ -1,3 +1,4 @@
+"use client";
 import { Enums } from "@/config";
 import {
   ChevronDown,
@@ -22,22 +23,24 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { on } from "events";
 import {
   DropdownMenuItemComponent,
   TooltipComponent,
 } from "@/components/coreUI";
 import { useUser } from "@clerk/nextjs";
 interface IDocumentItemProps {
-  id?: Id<"documents">;
+  id: Id<"documents">;
   label: string;
   active?: boolean;
   expanded: boolean;
   isSearch?: boolean;
   documentIcon?: React.ReactNode;
   level?: number;
-  onClick: () => void;
-  onExpand: () => void;
+  onClick: (id: Id<"documents">) => void;
+  onExpand: (
+    event: React.MouseEvent<HTMLElement, MouseEvent>,
+    id?: Id<"documents"> | undefined
+  ) => void;
 }
 
 const DocumentItem = ({
@@ -74,11 +77,17 @@ const DocumentItem = ({
   const { user } = useUser();
 
   return (
-    <div className="flex items-center btn-hover-effect px-0.5 py-1 group/parent overflow-hidden" key={id}>
+    <div
+      className={cn(
+        "flex items-center btn-hover-effect px-0.5 my-0.5 py-1 group/parent overflow-hidden",
+        active && "bg-primary/5 text-primary"
+      )}
+      key={id}
+      onClick={() => onClick(id)}
+    >
       <div
         className={cn(
-          "w-full flex items-center gap-x-1 min-h-6 overflow-hidden ",
-          active && "bg-primary/5 text-primary"
+          "w-full flex items-center gap-x-1 min-h-6 overflow-hidden "
         )}
         style={{ paddingLeft: level ? level * 12 + 12 : 10 }}
       >
@@ -97,7 +106,7 @@ const DocumentItem = ({
             <div
               className="hidden group-hover/children:block"
               role="button"
-              onClick={onExpand}
+              onClick={(event) => onExpand(event, id)}
             >
               <ChevronDown
                 strokeWidth={1.5}
@@ -126,7 +135,7 @@ const DocumentItem = ({
                 onCreate({
                   parentDocument: id,
                   expanded: expanded,
-                  onExpanded: onExpand,
+                  onExpanded: (event) => onExpand(event as any, id),
                 })
               }
             />

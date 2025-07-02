@@ -14,7 +14,7 @@ const Item = ({
 }: ISearchItemProps) => {
   return (
     <div
-      className="w-full flex items-center btn-hover-effect gap-2 p-1"
+      className="w-full flex items-center btn-hover-effect gap-2 p-1 text-muted-foreground font-normal"
       role="button"
     >
       {IconLeft && <IconLeft size={20} strokeWidth={1.5} />}

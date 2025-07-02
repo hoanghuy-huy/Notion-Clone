@@ -19,7 +19,7 @@ const DocumentsPage = () => {
         height={300}
         className="hidden dark:block"
       />
-      <ButtonToggleTheme />
+      <h3 className="text-2xl font-semibold">Welcome to Notix</h3>
     </div>
   );
 };

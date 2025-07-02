@@ -5,4 +5,9 @@ export const Enums = {
     tooltipCreateNewFileInside: "Add a page inside",
     tooltipMoreActions: "Delete, Duplicate, and more...",
   },
+  PATH: {
+    DOCUMENTS: {
+      _: "/documents",
+    },
+  },
 } as const;
