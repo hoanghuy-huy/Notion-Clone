@@ -131,11 +131,12 @@ const DocumentItem = ({
               size={18}
               className="flex-shrink hover:icon-hover-effect text-muted-foreground"
               role="button"
-              onClick={() =>
+              onClick={(e: any) =>
                 onCreate({
                   parentDocument: id,
                   expanded: expanded,
                   onExpanded: (event) => onExpand(event as any, id),
+                  event: e,
                 })
               }
             />

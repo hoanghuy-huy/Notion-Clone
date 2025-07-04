@@ -175,27 +175,11 @@ export const remove = mutation({
 
     if (existingDocument.userId !== userId) throw new Error("Unauthorized");
 
-    const recursiveRemove = async (id: Id<"documents">) => {
-      const children = await ctx.db
-        .query("documents")
-        .withIndex("byParentId", (q) =>
-          q.eq("userId", userId).eq("parentDocument", id)
-        )
-        .collect();
-
-      for (const child of children) {
-        await ctx.db.delete(child._id);
-        await recursiveRemove(child._id);
-      }
-    };
-
-    await recursiveRemove(args.id);
-
     return await ctx.db.delete(args.id);
   },
 });
 
-export const getOne = query({
+export const getDocumentById = query({
   args: {
     idDocument: v.id("documents"),
   },
@@ -211,6 +195,38 @@ export const getOne = query({
     if (!document) throw new Error("Document not found");
 
     if (document.userId !== userId) throw new Error("Unauthorized");
+
+    if (document.isPublished && document.isArchived) return document;
+
+    return document;
+  },
+});
+
+export const update = mutation({
+  args: {
+    id: v.id("documents"),
+    title: v.optional(v.string()),
+    content: v.optional(v.string()),
+    coverImage: v.optional(v.string()),
+    iconString: v.optional(v.string()),
+    isPubliched: v.optional(v.boolean()),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) throw new Error("Unauthenticated");
+
+    const userId = identity.subject;
+
+    const { id, ...rest } = args;
+
+    const existingDocument = await ctx.db.get(id);
+
+    if (!existingDocument) throw new Error("Document not found");
+
+    if (existingDocument.userId !== userId) throw new Error("Unauthorized");
+
+    const document = await ctx.db.patch(id, { ...rest });
 
     return document;
   },
