@@ -1,1 +1,2 @@
-export * from './useDocuments'
+export * from "./useDocuments";
+export * from "./use-cover-image";

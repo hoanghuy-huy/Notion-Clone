@@ -5,20 +5,28 @@ import { useConvexAuth } from "convex/react";
 import { redirect } from "next/navigation";
 import Navigation from "./_components/navigation";
 import { ThemeProvider } from "@/components/theme";
+import { EdgeStoreProvider } from "@/lib/edgestore";
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated, isLoading } = useConvexAuth();
   if (isLoading)
     return (
-      <div className="h-full flex justify-center items-center">
-        <div className="h-screen w-screen flex items-center justify-center">
-          <Spinner
-            size="md"
-            className="bg-black"
-            color="#fff"
-            loading={isLoading}
-          />
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+      >
+        <div className="h-full flex justify-center items-center">
+          <div className="h-screen w-screen flex items-center justify-center bg-white dark:bg-[#1f1f1f]">
+            <Spinner
+              size="md"
+              color="#fff"
+              loading={isLoading}
+              className="bg-black dark:bg-white"
+            />
+          </div>
         </div>
-      </div>
+      </ThemeProvider>
     );
 
   if (!isAuthenticated) {
@@ -35,7 +43,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
       <div className="h-full flex">
         <Navigation />
         <main className="h-full flex-1 overflow-y-auto dark:bg-[#1f1f1f]">
-          {children}
+          <EdgeStoreProvider>{children}</EdgeStoreProvider>
         </main>
       </div>
     </ThemeProvider>

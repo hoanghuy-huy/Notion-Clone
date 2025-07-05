@@ -49,7 +49,7 @@ const Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(
         {Array.from({ length: 8 }).map((_, i) => (
           <span
             key={i}
-            className="absolute top-0 left-1/2 w-[12.5%] h-full animate-spinner-leaf-fade"
+            className="absolute top-0 left-1/2 w-[12.5%] h-full animate-spinner-leaf-fade "
             style={{
               transform: `rotate(${i * 45}deg)`,
               animationDelay: `${-(7 - i) * 100}ms`,
@@ -57,7 +57,8 @@ const Spinner = React.forwardRef<HTMLSpanElement, SpinnerProps>(
           >
             <span
               className={cn(
-                "block w-full h-[30%] rounded-full",
+                "block w-full h-[30%] rounded-full ",
+
                 ...bgColorClass
               )}
             />

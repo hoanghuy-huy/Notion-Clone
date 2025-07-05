@@ -43,10 +43,10 @@ const Title = ({ initialDocument }: TitleProps) => {
   };
   return (
     <div className="flex items-center ">
-      <div className="flex items-center gap-x-0.5 btn-hover-effect p-1">
+      <div className="flex items-center btn-hover-effect p-1 gap-x-1">
         {initialDocument.icon && (
           <div className="h-5 w-5 flex items-center">
-            <Heart size={14} strokeWidth={1.5} />
+            {initialDocument.icon}
           </div>
         )}
         {isEditing ? (

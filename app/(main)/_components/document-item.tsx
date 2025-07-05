@@ -93,7 +93,7 @@ const DocumentItem = ({
       >
         <div className=" btn-hover-effect group/children">
           {documentIcon ? (
-            documentIcon
+            <div className="group-hover/children:hidden">{documentIcon}</div>
           ) : (
             <FileText
               strokeWidth={1.5}
