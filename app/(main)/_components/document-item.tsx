@@ -28,6 +28,8 @@ import {
   TooltipComponent,
 } from "@/components/coreUI";
 import { useUser } from "@clerk/nextjs";
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
 interface IDocumentItemProps {
   id: Id<"documents">;
   label: string;
@@ -54,12 +56,17 @@ const DocumentItem = ({
   onClick,
   onExpand,
 }: IDocumentItemProps) => {
-  const { onCreate, onArchive } = useDocuments();
+  const { onCreate, onArchive, onDuplicate } = useDocuments();
   const contentItems: any[] = [
     {
       icon: <Copy size={20} strokeWidth={1.5} />,
       title: "Duplicate",
-      // shortcut: "Ctrl + D",
+      onClick: id
+        ? () =>
+            onDuplicate({
+              id,
+            })
+        : undefined,
     },
     {
       icon: <SquarePen size={20} strokeWidth={1.5} />,

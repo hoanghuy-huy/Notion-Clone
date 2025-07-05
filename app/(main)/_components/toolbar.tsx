@@ -22,6 +22,7 @@ import {
   UploaderProvider,
   type UploadFn,
 } from "@/components/upload/uploader-provider";
+import CoverImageModal from "./cover-image-modal";
 interface ToolbarProps {
   initialData: Doc<"documents">;
   preview?: boolean;
@@ -115,33 +116,17 @@ const Toolbar = ({ initialData, preview }: ToolbarProps) => {
           </IconPicker>
         )}
         {!initialData?.coverImage && !preview && (
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button
-                className="text-muted-foreground text-xs"
-                variant={"outline"}
-                size={"sm"}
-                onClick={coverImage.onOpen}
-              >
-                <ImageIcon className="h-4 w-4 mr-2" />
-                Add cover
-              </Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogContent>
-                <DialogHeader className="border-b pb-3">
-                  <DialogTitle className="text-lg font-medium">
-                    Cover Image
-                  </DialogTitle>
-                </DialogHeader>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <DialogDescription></DialogDescription>
-                  </div>
-                </div>
-              </DialogContent>
-            </DialogContent>
-          </Dialog>
+          <CoverImageModal>
+            <Button
+              className="text-muted-foreground text-xs"
+              variant={"outline"}
+              size={"sm"}
+              onClick={coverImage.onOpen}
+            >
+              <ImageIcon className="h-4 w-4 mr-2" />
+              Add cover
+            </Button>
+          </CoverImageModal>
         )}
       </div>
       {isEditing && !preview ? (

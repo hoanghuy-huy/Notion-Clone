@@ -254,3 +254,81 @@ export const removeIcon = mutation({
     return document;
   },
 });
+
+export const duplicate = mutation({
+  args: {
+    id: v.id("documents"),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) throw new Error("Not authenticated");
+
+    const userId = identity.subject;
+
+    // Lấy document gốc
+    const original = await ctx.db.get(args.id);
+    if (!original) throw new Error("Document not found");
+
+    if (original.userId !== userId) throw new Error("Unauthorized");
+
+    // Hàm đệ quy để sao chép document và các con của nó
+    const duplicateDocument = async (
+      document: Doc<"documents">,
+      parentId?: Id<"documents">
+    ): Promise<Id<"documents">> => {
+      const newDocumentId = await ctx.db.insert("documents", {
+        title: document.title,
+        content: document.content,
+        coverImage: document.coverImage,
+        icon: document.icon,
+        isPublished: document.isPublished,
+        isArchived: document.isArchived,
+        userId: userId,
+        parentDocument: parentId ?? undefined,
+      });
+
+      // Lấy tất cả documents con
+      const children = await ctx.db
+        .query("documents")
+        .withIndex("byParentId", (q) =>
+          q.eq("userId", userId).eq("parentDocument", document._id)
+        )
+        .collect();
+
+      // Nhân bản từng document con
+      for (const child of children) {
+        await duplicateDocument(child, newDocumentId);
+      }
+
+      return newDocumentId;
+    };
+
+    // Gọi đệ quy từ document gốc
+    const newDocId = await duplicateDocument(original, original.parentDocument);
+
+    return { newId: newDocId };
+  },
+});
+
+export const removeCoverImage = mutation({
+  args: {
+    id: v.id("documents"),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) throw new Error("Not authenticated");
+
+    const userId = identity.subject;
+
+    const existingDocument = await ctx.db.get(args.id);
+
+    if (!existingDocument) throw new Error("Document not found");
+
+    if (existingDocument.userId !== userId) throw new Error("Unauthorized");
+
+    const document = await ctx.db.patch(args.id, { coverImage: undefined });
+
+    return document;
+  },
+});

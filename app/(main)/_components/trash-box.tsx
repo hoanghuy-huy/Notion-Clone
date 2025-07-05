@@ -31,9 +31,8 @@ const TrashBox = () => {
           key={item._id}
         >
           <div className="flex gap-x-2 items-center ">
-            <div>
-              <FileIcon strokeWidth={1.5} size={18} />
-            </div>
+            <div>{item.icon}</div>
+
             <div className="flex flex-col  gap-x-2 text-start">
               <p className="text-primary ">{item.title}</p>
               {/* <p className="text-muted-foreground text-sm">

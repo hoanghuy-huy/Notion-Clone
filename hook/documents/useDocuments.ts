@@ -13,6 +13,9 @@ export const useDocuments = () => {
   const archive = useMutation(api.documents.archive);
   const restore = useMutation(api.documents.restore);
   const remove = useMutation(api.documents.remove);
+  const duplicate = useMutation(api.documents.duplicate);
+  const update = useMutation(api.documents.update);
+  const removeCoverImage = useMutation(api.documents.removeCoverImage);
   const router = useRouter();
   const onCreate = ({
     title = Enums.documents.titleCreateNewFile,
@@ -71,6 +74,35 @@ export const useDocuments = () => {
 
     return document;
   };
+
+  const onDuplicate = ({
+    id,
+
+  }: {
+    id: Id<"documents">;
+
+  }) => {
+    const promise = duplicate({
+      id: id,
+    })
+    toast.promise(promise, documentMessages.duplicate);
+  };
+
+  const onUpdate = ({ id, ...rest }: { id: Id<"documents"> }) => {
+    const promise = update({
+      id: id,
+      ...rest
+    })
+
+    toast.promise(promise, documentMessages.update);
+  }
+
+  const onRemoveCoverImage = ({ id }: { id: Id<"documents"> }) => {
+    const promise = removeCoverImage({
+      id: id,
+    })
+    toast.promise(promise, documentMessages.removeCoverImage);
+  }
   return {
     onCreate,
     onArchive,
@@ -78,6 +110,9 @@ export const useDocuments = () => {
     onRestoreDocument,
     onRemove,
     getOneDocument,
+    onDuplicate,
+    onUpdate,
+    onRemoveCoverImage,
     // getDocuments,
   };
 };

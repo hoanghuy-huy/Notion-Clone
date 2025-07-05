@@ -3,6 +3,9 @@ export enum DocumentMessageKey {
   Archive = "archive",
   Restore = "restore",
   Remove = "remove",
+  Duplicate = "duplicate",
+  Update = "update",
+  RemoveCoverImage = "removeCoverImage",
 }
 
 export const documentMessages: Record<DocumentMessageKey, ToastMessage> = {
@@ -17,7 +20,7 @@ export const documentMessages: Record<DocumentMessageKey, ToastMessage> = {
     error: "Move to trash failed",
   },
   [DocumentMessageKey.Restore]: {
-   loading: "Restore note...",
+    loading: "Restore note...",
     success: "Restore note successfully",
     error: "Restore note failed",
   },
@@ -25,5 +28,20 @@ export const documentMessages: Record<DocumentMessageKey, ToastMessage> = {
     loading: "Remove note...",
     success: "Remove note successfully",
     error: "Remove note failed",
+  },
+  [DocumentMessageKey.Duplicate]: {
+    loading: "Duplicate note...",
+    success: "Duplicate note successfully",
+    error: "Duplicate note failed",
+  },
+  [DocumentMessageKey.Update]: {
+    loading: "Update note...",
+    success: "Update note successfully",
+    error: "Update note failed",
+  },
+  [DocumentMessageKey.RemoveCoverImage]: {
+    loading: "Remove cover image...",
+    success: "Remove cover image successfully",
+    error: "Remove cover image failed",
   },
 };
