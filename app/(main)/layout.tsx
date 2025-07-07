@@ -3,9 +3,9 @@
 import { Spinner } from "@/components/ui/spinner";
 import { useConvexAuth } from "convex/react";
 import { redirect } from "next/navigation";
-import Navigation from "./_components/navigation";
 import { ThemeProvider } from "@/components/theme";
 import { EdgeStoreProvider } from "@/lib/edgestore";
+import Navigation from "@/app/(main)/_components/navigation";
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated, isLoading } = useConvexAuth();
   if (isLoading)
