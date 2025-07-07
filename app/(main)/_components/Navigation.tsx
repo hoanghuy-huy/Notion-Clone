@@ -26,7 +26,7 @@ import {
 import { ButtonToggleTheme } from "@/components/theme";
 import Navbar from "./navbar";
 
-const Navigation = () => {
+const Nav = () => {
   const defaultWidthSidebar = 250;
   const isMobile = useMediaQuery("(max-width: 768px)");
   const isResizingRef = useRef(false);
@@ -208,4 +208,4 @@ const Navigation = () => {
   );
 };
 
-export default Navigation;
+export default Nav;

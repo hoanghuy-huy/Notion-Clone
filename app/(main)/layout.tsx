@@ -5,7 +5,7 @@ import { useConvexAuth } from "convex/react";
 import { redirect } from "next/navigation";
 import { ThemeProvider } from "@/components/theme";
 import { EdgeStoreProvider } from "@/lib/edgestore";
-import Navigation from "@/app/(main)/_components/navigation";
+import Nav from "@/app/(main)/_components/navigation";
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated, isLoading } = useConvexAuth();
   if (isLoading)
@@ -41,7 +41,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
       disableTransitionOnChange
     >
       <div className="h-full flex">
-        <Navigation />
+        <Nav />
         <main className="h-full flex-1 overflow-y-auto dark:bg-[#1f1f1f]">
           <EdgeStoreProvider>{children}</EdgeStoreProvider>
         </main>
