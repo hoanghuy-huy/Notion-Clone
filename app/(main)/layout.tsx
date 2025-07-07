@@ -5,7 +5,7 @@ import { useConvexAuth } from "convex/react";
 import { redirect } from "next/navigation";
 import { ThemeProvider } from "@/components/theme";
 import { EdgeStoreProvider } from "@/lib/edgestore";
-import Nav from "@/app/(main)/_components/navigation";
+import Nav from "@/app/(main)/_components/nav";
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated, isLoading } = useConvexAuth();
   if (isLoading)
