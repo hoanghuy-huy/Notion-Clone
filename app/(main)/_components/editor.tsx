@@ -10,50 +10,39 @@ import { api } from "@/convex/_generated/api";
 import { useParams } from "next/navigation";
 import { Id } from "@/convex/_generated/dataModel";
 import { useTheme } from "next-themes";
+import { useEdgeStore } from "@/lib/edgestore";
 interface EditorProps {
-  onChange?: (content: string) => void;
-  initialContent: string | undefined;
+  onChange?: (value: string) => void;
+  initialContent?: string;
   editable?: boolean;
-  documentId: string;
 }
 
-const Editor = ({
-  onChange,
-  initialContent,
-  editable = true,
-  documentId,
-}: EditorProps) => {
-  const update = useMutation(api.documents.update);
+const Editor = ({ onChange, initialContent, editable }: EditorProps) => {
   const { resolvedTheme } = useTheme();
-
-  const editor = useCreateBlockNote({
+  const { edgestore } = useEdgeStore();
+  const handleUpload = async (file: File) => {
+    const res = await edgestore.publicImages.upload({ file });
+    return res.url;
+  };
+  const editor: BlockNoteEditor = useCreateBlockNote({
     initialContent: initialContent
       ? (JSON.parse(initialContent) as PartialBlock[])
       : undefined,
+    uploadFile: handleUpload,
   });
 
-  // Lưu khi thay đổi nội dung
-  React.useEffect(() => {
-    if (!editor) return;
-
-    const onChange = () => {
-      const content = JSON.stringify(editor.document, null, 2);
-      update({
-        id: documentId as Id<"documents">,
-        content,
-      });
-    };
-
-    editor.onEditorContentChange(onChange);
-  }, [editor]);
-
-  if (!editor) return null;
+  const uploadToDatabase = () => {
+    if (onChange) {
+      onChange(JSON.stringify(editor.document, null, 2));
+    }
+  };
 
   return (
     <BlockNoteView
       editor={editor}
       theme={resolvedTheme === "dark" ? "dark" : "light"}
       editable={editable}
+      onChange={uploadToDatabase}
     />
   );
 };

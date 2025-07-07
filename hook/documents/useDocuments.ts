@@ -68,6 +68,7 @@ export const useDocuments = () => {
   };
 
   const getOneDocument = ({ id }: { id: Id<"documents"> }) => {
+
     const document = useQuery(api.documents.getDocumentById, {
       idDocument: id,
     });
@@ -75,34 +76,29 @@ export const useDocuments = () => {
     return document;
   };
 
-  const onDuplicate = ({
-    id,
-
-  }: {
-    id: Id<"documents">;
-
-  }) => {
+  const onDuplicate = ({ id }: { id: Id<"documents"> }) => {
     const promise = duplicate({
       id: id,
-    })
+    });
     toast.promise(promise, documentMessages.duplicate);
   };
 
   const onUpdate = ({ id, ...rest }: { id: Id<"documents"> }) => {
     const promise = update({
       id: id,
-      ...rest
-    })
+      ...rest,
+    });
 
     toast.promise(promise, documentMessages.update);
-  }
+  };
 
   const onRemoveCoverImage = ({ id }: { id: Id<"documents"> }) => {
     const promise = removeCoverImage({
       id: id,
-    })
+    });
     toast.promise(promise, documentMessages.removeCoverImage);
-  }
+  };
+
   return {
     onCreate,
     onArchive,

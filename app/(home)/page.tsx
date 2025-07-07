@@ -44,9 +44,9 @@ export default function Home() {
     },
   ];
   return (
-    <div className="min-h-full flex flex-col">
+    <div className="min-h-full flex flex-col ">
       <Header />
-      <div className="flex flex-col items-center gap-y-12 flex-1 px-9 pb-10 md:px-14 lg:px-28">
+      <div className="flex flex-col items-center gap-y-12 flex-1 px-9 pb-10 md:px-14 lg:px-28 dark:text-black dark:bg-white ">
         <Heading />
         <SuperDuperHero />
         <ContentSection

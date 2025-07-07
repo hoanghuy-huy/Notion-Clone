@@ -14,12 +14,11 @@ interface NavbarProps {
   isCollapsed: boolean;
 }
 const Navbar = ({ openSidebar, isCollapsed }: NavbarProps) => {
-  const { getOneDocument } = useDocuments();
   const params = useParams();
-  const router = useRouter();
-  const document = useQuery(api.documents.getDocumentById, {
-    idDocument: params.documentId as Id<"documents">,
-  });
+
+  const { getOneDocument } = useDocuments();
+
+  const document = getOneDocument({ id: params.documentId as Id<"documents"> });
 
   if (document === undefined)
     return (

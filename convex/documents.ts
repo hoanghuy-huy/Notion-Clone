@@ -61,7 +61,7 @@ export const archive = mutation({
 
     const existingDocument = await ctx.db.get(args.id);
 
-    if (!existingDocument) throw new Error("Document not found");
+    if (!existingDocument) return null;
 
     if (existingDocument.userId !== userId) throw new Error("Unauthorized");
 
@@ -102,7 +102,7 @@ export const restore = mutation({
 
     const existingDocument = await ctx.db.get(args.id);
 
-    if (!existingDocument) throw new Error("Document not found");
+    if (!existingDocument) return null;
 
     if (existingDocument.userId !== userId) throw new Error("Unauthorized");
 
@@ -171,7 +171,7 @@ export const remove = mutation({
 
     const existingDocument = await ctx.db.get(args.id);
 
-    if (!existingDocument) throw new Error("Document not found");
+    if (!existingDocument) return null;
 
     if (existingDocument.userId !== userId) throw new Error("Unauthorized");
 
@@ -192,7 +192,7 @@ export const getDocumentById = query({
 
     const document = await ctx.db.get(args.idDocument);
 
-    if (!document) throw new Error("Document not found");
+    if (!document) return null;
 
     if (document.userId !== userId) throw new Error("Unauthorized");
 
@@ -222,7 +222,7 @@ export const update = mutation({
 
     const existingDocument = await ctx.db.get(id);
 
-    if (!existingDocument) throw new Error("Document not found");
+    if (!existingDocument) return null;
 
     if (existingDocument.userId !== userId) throw new Error("Unauthorized");
 
@@ -245,7 +245,7 @@ export const removeIcon = mutation({
 
     const existingDocument = await ctx.db.get(args.id);
 
-    if (!existingDocument) throw new Error("Document not found");
+    if (!existingDocument) return null;
 
     if (existingDocument.userId !== userId) throw new Error("Unauthorized");
 
@@ -267,7 +267,7 @@ export const duplicate = mutation({
 
     // Lấy document gốc
     const original = await ctx.db.get(args.id);
-    if (!original) throw new Error("Document not found");
+    if (!original) return null;
 
     if (original.userId !== userId) throw new Error("Unauthorized");
 
@@ -323,7 +323,7 @@ export const removeCoverImage = mutation({
 
     const existingDocument = await ctx.db.get(args.id);
 
-    if (!existingDocument) throw new Error("Document not found");
+    if (!existingDocument) return null;
 
     if (existingDocument.userId !== userId) throw new Error("Unauthorized");
 

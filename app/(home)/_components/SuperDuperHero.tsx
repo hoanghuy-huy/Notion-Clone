@@ -68,8 +68,9 @@ const renderButtons = (
           autoplay.reset();
         }}
         className={cn({
+          "dark:bg-black dark:text-white": true,
           "mx-2": true,
-          "bg-gray-300": currentIndex === item.id,
+          "!bg-gray-300 !text-black": currentIndex === item.id,
         })}
         key={item.id}
         variant={"outline"}
