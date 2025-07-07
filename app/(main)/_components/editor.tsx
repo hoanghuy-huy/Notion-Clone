@@ -1,14 +1,10 @@
 "use client";
 import React from "react";
-import { useBlockNoteEditor, useCreateBlockNote } from "@blocknote/react";
+import { useCreateBlockNote } from "@blocknote/react";
 import { BlockNoteView } from "@blocknote/mantine";
 import "@blocknote/core/fonts/inter.css";
 import "@blocknote/mantine/style.css";
 import { BlockNoteEditor, PartialBlock } from "@blocknote/core";
-import { useMutation } from "convex/react";
-import { api } from "@/convex/_generated/api";
-import { useParams } from "next/navigation";
-import { Id } from "@/convex/_generated/dataModel";
 import { useTheme } from "next-themes";
 import { useEdgeStore } from "@/lib/edgestore";
 interface EditorProps {

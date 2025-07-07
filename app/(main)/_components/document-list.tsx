@@ -1,5 +1,4 @@
 import { Doc, Id } from "@/convex/_generated/dataModel";
-import { useDocuments } from "@/hook/documents";
 import React from "react";
 import DocumentItem from "./document-item";
 import { useParams, useRouter } from "next/navigation";

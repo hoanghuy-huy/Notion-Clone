@@ -1,10 +1,8 @@
 "use client";
-import { api } from "@/convex/_generated/api";
 import { Doc, Id } from "@/convex/_generated/dataModel";
 import { useDocuments } from "@/hook/documents";
-import { useQuery } from "convex/react";
-import { Heart, MenuIcon } from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
+import { MenuIcon } from "lucide-react";
+import { useParams } from "next/navigation";
 import React from "react";
 import Title from "./title";
 import Banner from "./banner";

@@ -1,27 +1,12 @@
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import { IconPicker } from "@/components/ui/icon-picker";
-import { SingleImageDropzone } from "@/components/ui/single-image-dropzone";
 import { api } from "@/convex/_generated/api";
 import { Doc } from "@/convex/_generated/dataModel";
 import { useCoverImage, useDocuments } from "@/hook/documents";
-import { useEdgeStore } from "@/lib/edgestore";
-import { DialogTrigger } from "@radix-ui/react-dialog";
 import { useMutation } from "convex/react";
 import { ImageIcon, Smile, X } from "lucide-react";
 import React, { ElementRef, useRef } from "react";
 import TextareaAutosize from "react-textarea-autosize";
-
-import {
-  UploaderProvider,
-  type UploadFn,
-} from "@/components/upload/uploader-provider";
 import CoverImageModal from "./cover-image-modal";
 interface ToolbarProps {
   initialData: Doc<"documents">;

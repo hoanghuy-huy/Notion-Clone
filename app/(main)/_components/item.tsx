@@ -1,5 +1,4 @@
-import { LucideIcon, Search } from "lucide-react";
-import { title } from "process";
+import { LucideIcon } from "lucide-react";
 import React from "react";
 
 interface ISearchItemProps {

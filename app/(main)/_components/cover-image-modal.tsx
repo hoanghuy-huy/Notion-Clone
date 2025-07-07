@@ -8,7 +8,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ImageIcon } from "lucide-react";
 import { SingleImageDropzone } from "@/components/upload/single-image";
 import {
   UploaderProvider,

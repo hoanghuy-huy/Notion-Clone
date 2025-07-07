@@ -1,5 +1,5 @@
 "use client";
-import { FileIcon, Trash2, Undo2 } from "lucide-react";
+import { Trash2, Undo2 } from "lucide-react";
 import React from "react";
 import Item from "./item";
 import {
@@ -10,8 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { TooltipComponent } from "@/components/coreUI";
 import { useDocuments } from "@/hook/documents";
-import { Doc } from "@/convex/_generated/dataModel";
-import { cn } from "@/lib/utils";
+
 const TrashBox = () => {
   const { getTrashDocuments, onRestoreDocument, onRemove } = useDocuments();
   const trashItem = getTrashDocuments({});

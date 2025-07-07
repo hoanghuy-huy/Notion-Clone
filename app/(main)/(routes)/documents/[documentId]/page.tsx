@@ -1,16 +1,12 @@
 "use client";
 import CoverImage from "@/app/(main)/_components/cover-image";
 import NotFoundDocument from "@/app/(main)/_components/not-found-document";
-// import Editor from "@/app/(main)/_components/editor";
 import Toolbar from "@/app/(main)/_components/toolbar";
-import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Spinner } from "@/components/ui/spinner";
 import { api } from "@/convex/_generated/api";
 import { Doc, Id } from "@/convex/_generated/dataModel";
 import { useDocuments } from "@/hook/documents";
 import { useMutation, useQuery } from "convex/react";
-import { get } from "http";
 import dynamic from "next/dynamic";
 import React from "react";
 const Editor = dynamic(() => import("@/app/(main)/_components/editor"), {
@@ -53,10 +49,7 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
       </div>
     );
 
-  if (document === null)
-    return (
-      <NotFoundDocument />  
-    );
+  if (document === null) return <NotFoundDocument />;
 
   return (
     <div className="pb-40">

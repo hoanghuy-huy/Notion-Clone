@@ -7,14 +7,7 @@ import { cn } from "@/lib/utils";
 import { useUser } from "@clerk/nextjs";
 import UserItem from "./user-item";
 import SidebarItem from "./menu-item";
-import { useQuery } from "convex/react";
-import { api } from "@/convex/_generated/api";
 import Item from "./item";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import {
   Dialog,
   DialogContent,

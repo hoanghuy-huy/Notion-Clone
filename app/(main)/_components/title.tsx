@@ -4,7 +4,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { api } from "@/convex/_generated/api";
 import { Doc } from "@/convex/_generated/dataModel";
 import { useMutation } from "convex/react";
-import { Heart } from "lucide-react";
 import React, { useRef } from "react";
 
 interface TitleProps {
