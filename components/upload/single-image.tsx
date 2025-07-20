@@ -7,6 +7,7 @@ import {
   UploadCloudIcon,
   XIcon,
 } from "lucide-react";
+import Image from "next/image";
 import * as React from "react";
 import { useDropzone, type DropzoneOptions } from "react-dropzone";
 import { ProgressCircle } from "./progress-circle";
@@ -176,10 +177,12 @@ const SingleImageDropzone = React.forwardRef<
         <input ref={ref} {...getInputProps()} {...props} />
 
         {displayUrl ? (
-          <img
+          <Image
             className="h-full w-full rounded-md object-cover"
             src={displayUrl}
             alt={fileState?.file.name ?? "uploaded image"}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         ) : (
           // Placeholder content shown when no image is selected
