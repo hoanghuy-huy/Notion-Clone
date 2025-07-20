@@ -147,7 +147,8 @@ const DocumentItem = ({
                   parentDocument: id,
                   expanded: expanded,
                   onExpanded: (event) => onExpand(event as React.MouseEvent<HTMLElement, MouseEvent>, id),
-                  event: e as any,
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  event: e as unknown,
                 })
               }
             />
