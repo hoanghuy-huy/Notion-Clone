@@ -1,4 +1,5 @@
 "use client";
+
 import { Enums } from "@/config";
 import {
   ChevronDown,
@@ -61,6 +62,8 @@ const DocumentItem = ({
   onExpand,
 }: IDocumentItemProps) => {
   const { onCreate, onArchive, onDuplicate } = useDocuments();
+  const { user } = useUser();
+
   const contentItems: ContentItem[] = [
     {
       icon: <Copy size={20} strokeWidth={1.5} />,
@@ -75,17 +78,14 @@ const DocumentItem = ({
     {
       icon: <SquarePen size={20} strokeWidth={1.5} />,
       title: "Rename",
-      // shortcut: "Ctrl + R",
     },
     {
       icon: <Trash2 size={20} strokeWidth={1.5} />,
       title: "Move to trash",
-      // shortcut: "Ctrl + R",
       hover: "danger",
       onClick: id ? () => onArchive({ id }) : undefined,
     },
   ];
-  const { user } = useUser();
 
   return (
     <div
@@ -102,7 +102,7 @@ const DocumentItem = ({
         )}
         style={{ paddingLeft: level ? level * 12 + 12 : 10 }}
       >
-        <div className=" btn-hover-effect group/children">
+        <div className="btn-hover-effect group/children">
           {documentIcon ? (
             <div className="group-hover/children:hidden">{documentIcon}</div>
           ) : (
@@ -113,71 +113,45 @@ const DocumentItem = ({
             />
           )}
 
-          {
-            <div
-              className="hidden group-hover/children:block"
-              role="button"
-              onClick={(event) => onExpand(event as React.MouseEvent<HTMLElement, MouseEvent>, id)}
-            >
-              <ChevronDown
-                strokeWidth={1.5}
-                size={18}
-                className={cn(
-                  " delay-150 transition-all ease-in-out",
-                  !expanded ? "-rotate-90" : "rotate-0"
-                )}
-              />
-            </div>
-          }
+          <div
+            className="hidden group-hover/children:block"
+            role="button"
+            onClick={(event) =>
+              onExpand(event as React.MouseEvent<HTMLElement, MouseEvent>, id)
+            }
+          >
+            <ChevronDown
+              strokeWidth={1.5}
+              size={18}
+              className={cn(
+                "delay-150 transition-all ease-in-out",
+                !expanded ? "-rotate-90" : "rotate-0"
+              )}
+            />
+          </div>
         </div>
         <p className="truncate mr-1">{label}</p>
       </div>
       <div className="relative flex items-center flex-row-reverse gap-x-2 opacity-0 group-hover/parent:opacity-100 transition-opacity">
-        <div className="flex items-center flex-row-reverse gap-x-2 ">
-          <TooltipComponent
-            message={Enums.documents.tooltipCreateNewFileInside}
-          >
+        <div className="flex items-center flex-row-reverse gap-x-2">
+          <TooltipComponent message={Enums.documents.tooltipCreateNewFileInside}>
             <Plus
               strokeWidth={1.5}
               size={18}
               className="flex-shrink hover:icon-hover-effect text-muted-foreground"
               role="button"
-              onClick={(e) =>
+              onClick={(e: React.MouseEvent<SVGSVGElement, MouseEvent>) =>
                 onCreate({
                   parentDocument: id,
                   expanded: expanded,
-                  onExpanded: (event) => onExpand(event as React.MouseEvent<HTMLElement, MouseEvent>, id),
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  event: e as MouseEvent,
+                  onExpanded: (event) =>
+                    onExpand(event as React.MouseEvent<HTMLElement, MouseEvent>, id),
+                  event: e as unknown as React.MouseEvent<HTMLElement, MouseEvent>,
                 })
               }
             />
           </TooltipComponent>
-          {/* <DropdownMenuComponent
-            label="More actions"
-            trigger={
-              <TooltipComponent message={Enums.documents.tooltipMoreActions}>
-                <Ellipsis
-                  strokeWidth={1.5}
-                  size={18}
-                  className="flex-shrink hover:icon-hover-effect text-muted-foreground"
-                />
-              </TooltipComponent>
-            }
-            contentItems={[
-              {
-                icon: (
-                  <Trash2
-                    strokeWidth={1.5}
-                    size={18}
-                    className="flex-shrink hover:icon-hover-effect text-muted-foreground"
-                  />
-                ),
-                title: "test",
-                shortcut: "⌘⌘",
-              },
-            ]}
-          /> */}
+
           <DropdownMenu>
             <DropdownMenuTrigger>
               <TooltipComponent message={Enums.documents.tooltipMoreActions}>
@@ -197,7 +171,6 @@ const DocumentItem = ({
                 title="Add to favorites"
               />
               <DropdownMenuSeparator className="bg-gray-300/5 h-[1px]" />
-
               {contentItems.map((item, idx) => (
                 <DropdownMenuItemComponent
                   key={idx}
