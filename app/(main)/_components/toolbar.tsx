@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { IconPicker } from "@/components/ui/icon-picker";
 import { api } from "@/convex/_generated/api";
 import { Doc } from "@/convex/_generated/dataModel";
-import { useCoverImage, useDocuments } from "@/hook/documents";
+import { useCoverImage } from "@/hook/documents";
 import { useMutation } from "convex/react";
 import { ImageIcon, Smile, X } from "lucide-react";
 import React, { ElementRef, useRef } from "react";
@@ -63,7 +63,6 @@ const Toolbar = ({ initialData, preview }: ToolbarProps) => {
   };
 
   const coverImage = useCoverImage();
-  const [file, setFile] = React.useState<File>();
 
   return (
     <div className="pl-[54px] group relative">

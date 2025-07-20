@@ -15,7 +15,6 @@ interface IDocumentItemProps {
 const DocumentList = ({
   parentDocumentId,
   level = 0,
-  data,
 }: IDocumentItemProps) => {
   const documents = useQuery(api.documents.get, {
     parentDocument: parentDocumentId,

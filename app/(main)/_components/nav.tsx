@@ -29,7 +29,6 @@ const Nav = () => {
   const [isCollapsed, setIsCollapsed] = React.useState(isMobile);
   const [currentSizeSidebar, setCurrentSizeSidebar] =
     React.useState(defaultWidthSidebar);
-  const { user } = useUser();
   const handleOnMouseDown = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {

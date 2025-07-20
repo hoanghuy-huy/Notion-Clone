@@ -25,7 +25,6 @@ interface IUserItemProps {
 
 const UserItem = ({ closeSidebar }: IUserItemProps) => {
   const { user } = useUser();
-  const create = useMutation(api.documents.create);
   const triggerRef = React.useRef<HTMLButtonElement>(null);
 
   const handleOpenMenu = () => {

@@ -6,7 +6,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { api } from "@/convex/_generated/api";
 import { Doc, Id } from "@/convex/_generated/dataModel";
 import { useDocuments } from "@/hook/documents";
-import { useMutation, useQuery } from "convex/react";
+import { useMutation } from "convex/react";
 import dynamic from "next/dynamic";
 import React from "react";
 const Editor = dynamic(() => import("@/app/(main)/_components/editor"), {

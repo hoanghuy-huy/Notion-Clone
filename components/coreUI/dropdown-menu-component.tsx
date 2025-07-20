@@ -7,7 +7,6 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { LucideIcon } from "lucide-react";
 
 interface ContentItemProps {
   icon: React.ReactNode;

@@ -33,7 +33,6 @@ interface IDocumentItemProps {
   label: string;
   active?: boolean;
   expanded: boolean;
-  isSearch?: boolean;
   documentIcon?: React.ReactNode;
   level?: number;
   onClick: (id: Id<"documents">) => void;
@@ -48,7 +47,6 @@ const DocumentItem = ({
   label,
   active,
   expanded,
-  isSearch,
   documentIcon,
   level = 0,
   onClick,
@@ -111,7 +109,7 @@ const DocumentItem = ({
             <div
               className="hidden group-hover/children:block"
               role="button"
-              onClick={(event) => onExpand(event, id)}
+              onClick={(event) => onExpand(event as React.MouseEvent, id)}
             >
               <ChevronDown
                 strokeWidth={1.5}
@@ -136,11 +134,11 @@ const DocumentItem = ({
               size={18}
               className="flex-shrink hover:icon-hover-effect text-muted-foreground"
               role="button"
-              onClick={(e: any) =>
+              onClick={(e: React.MouseEvent) =>
                 onCreate({
                   parentDocument: id,
                   expanded: expanded,
-                  onExpanded: (event) => onExpand(event as any, id),
+                  onExpanded: (event) => onExpand(event as React.MouseEvent, id),
                   event: e,
                 })
               }
