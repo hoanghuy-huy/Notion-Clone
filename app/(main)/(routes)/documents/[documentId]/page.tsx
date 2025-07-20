@@ -23,19 +23,23 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
     return typeof id === "string" && /^[a-z0-9]{16,}$/.test(id);
   };
 
-  if (!isValidConvexId(params.documentId as string))
-    return <NotFoundDocument />;
-
   const { getOneDocument } = useDocuments();
-  const document = getOneDocument({ id: params.documentId });
   const update = useMutation(api.documents.update);
+  const document = isValidConvexId(params.documentId as string)
+    ? getOneDocument({ id: params.documentId })
+    : undefined;
+
   const onChange = (content: string) => {
     update({
       id: params.documentId,
       content,
     });
   };
-  if (!document === undefined)
+
+  if (!isValidConvexId(params.documentId as string))
+    return <NotFoundDocument />;
+
+  if (document === undefined)
     return (
       <div className="md:max-w-3xl lg:max-w-4xl mx-auto mt-10">
         <CoverImage.Skeleton />
