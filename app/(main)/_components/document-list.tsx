@@ -67,7 +67,7 @@ const DocumentList = ({
           No pages inside
         </p>
       )}
-      {documents?.map((item): any => (
+      {documents?.map((item): React.JSX.Element => (
         <div key={item._id}>
           <DocumentItem
             id={item._id}

@@ -42,6 +42,14 @@ interface IDocumentItemProps {
   ) => void;
 }
 
+interface ContentItem {
+  icon: React.ReactNode;
+  title: string;
+  shortcut?: string;
+  hover?: "danger" | string;
+  onClick?: (() => void) | undefined;
+}
+
 const DocumentItem = ({
   id,
   label,
@@ -53,7 +61,7 @@ const DocumentItem = ({
   onExpand,
 }: IDocumentItemProps) => {
   const { onCreate, onArchive, onDuplicate } = useDocuments();
-  const contentItems: any[] = [
+  const contentItems: ContentItem[] = [
     {
       icon: <Copy size={20} strokeWidth={1.5} />,
       title: "Duplicate",
@@ -109,7 +117,7 @@ const DocumentItem = ({
             <div
               className="hidden group-hover/children:block"
               role="button"
-              onClick={(event) => onExpand(event as React.MouseEvent, id)}
+              onClick={(event) => onExpand(event as React.MouseEvent<HTMLElement, MouseEvent>, id)}
             >
               <ChevronDown
                 strokeWidth={1.5}
@@ -134,11 +142,11 @@ const DocumentItem = ({
               size={18}
               className="flex-shrink hover:icon-hover-effect text-muted-foreground"
               role="button"
-              onClick={(e: React.MouseEvent) =>
+              onClick={(e: React.MouseEvent<SVGSVGElement, MouseEvent>) =>
                 onCreate({
                   parentDocument: id,
                   expanded: expanded,
-                  onExpanded: (event) => onExpand(event as React.MouseEvent, id),
+                  onExpanded: (event) => onExpand(event as React.MouseEvent<HTMLElement, MouseEvent>, id),
                   event: e,
                 })
               }
@@ -191,6 +199,7 @@ const DocumentItem = ({
 
               {contentItems.map((item, idx) => (
                 <DropdownMenuItemComponent
+                  key={idx}
                   icon={item.icon}
                   title={item.title}
                   shortcut={item.shortcut}

@@ -4,7 +4,6 @@ import { MenuIcon, Search, Settings2 } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useMediaQuery } from "usehooks-ts";
 import { cn } from "@/lib/utils";
-import { useUser } from "@clerk/nextjs";
 import UserItem from "./user-item";
 import SidebarItem from "./menu-item";
 import Item from "./item";

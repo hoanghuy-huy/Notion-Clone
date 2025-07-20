@@ -41,7 +41,7 @@ const CoverImageModal = ({ children }: { children: React.ReactNode }) => {
 
       return res;
     },
-    [edgestore]
+    [edgestore, params.documentId, update]
   );
 
   return (

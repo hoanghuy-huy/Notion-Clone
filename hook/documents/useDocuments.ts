@@ -4,7 +4,7 @@ import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
 import { Enums } from "@/config";
 import { documentMessages } from "@/constants/messages";
-import { Doc, Id } from "@/convex/_generated/dataModel";
+import { Id } from "@/convex/_generated/dataModel";
 import { useRouter } from "next/navigation";
 export const useDocuments = () => {
   const create = useMutation(api.documents.create);
@@ -35,7 +35,7 @@ export const useDocuments = () => {
     const promise = create({
       title: title,
       parentDocument: parentDocument,
-    }).then((docs) => {
+    }).then((docs:any) => {
       if (docs && !expanded) onExpanded(event, docs._id);
     });
     toast.promise(promise, documentMessages.create);
