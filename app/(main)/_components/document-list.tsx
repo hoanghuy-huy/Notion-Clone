@@ -77,7 +77,6 @@ const DocumentList = ({
             active={documentId === item._id}
             onExpand={(event) => onExpand(event, item._id)}
             expanded={expanded[item._id]}
-            isSearch={false}
             onClick={() => redirect(item._id)}
           />
           {expanded[item._id] && (
